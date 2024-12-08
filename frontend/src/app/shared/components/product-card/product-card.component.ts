@@ -19,17 +19,19 @@ export class ProductCardComponent implements OnInit {
 
 
   @Input() product!: ProductType;
-
   serverStaticPath = environment.serverStaticPath;
   count: number = 1;
   @Input() isLight: boolean = false;
   @Input() countInCart: number | undefined = 0;
+
+  isLogged: boolean = false;
 
   constructor(private cartService: CartService,
               private favoriteService: FavoriteService,
               private _snackBar: MatSnackBar,
               private router: Router,
               private authService: AuthService) {
+    this.isLogged = this.authService.getIsLoggedIn();
   }
 
   ngOnInit(): void {
