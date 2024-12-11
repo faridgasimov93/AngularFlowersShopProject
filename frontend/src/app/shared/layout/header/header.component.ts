@@ -42,14 +42,14 @@ export class HeaderComponent implements OnInit {
       )
       .subscribe(value => {
         if (value && value.length > 2) {
-              this.productService.searchProducts(value)
-                .subscribe((data: ProductType[]) => {
-                  this.products = data;
-                  this.showedSearch = true;
-                });
-            } else {
-              this.products = [];
-            }
+          this.productService.searchProducts(value)
+            .subscribe((data: ProductType[]) => {
+              this.products = data;
+              this.showedSearch = true;
+            });
+        } else {
+          this.products = [];
+        }
       });
 
     this.authService.isLogged$.subscribe((isLoggedIn: boolean) => {
@@ -111,7 +111,7 @@ export class HeaderComponent implements OnInit {
 
 
   @HostListener('document:click', ['$event'])
-  click(event: Event) {
+  click(event: Event): void {
     if (this.showedSearch && (event.target as HTMLElement).className.indexOf('search-product') === -1) {
       this.showedSearch = false;
     }

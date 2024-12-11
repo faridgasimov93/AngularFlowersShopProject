@@ -129,6 +129,7 @@ export class CatalogComponent implements OnInit {
             }
             this.productService.getProducts(this.activeParams)
               .subscribe(data => {
+                this.products = data.items;
                 this.pages = [];
                 for (let i = 1; i <= data.pages; i++) {
                   this.pages.push(i);
