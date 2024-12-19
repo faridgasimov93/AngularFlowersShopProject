@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ProductService} from "../../../shared/services/product.service";
 import {ProductType} from "../../../../types/product.type";
 import {CategoryService} from "../../../shared/services/category.service";
@@ -26,7 +26,7 @@ export class CatalogComponent implements OnInit {
   categoriesWithTypes: CategoryWithTypeType[] = [];
   activeParams: ActiveParamsType = {types: []};
   appliedFilters: AppliedFilter[] = [];
-  sortingOpen = false;
+  sortingOpen: boolean = false;
   sortingOptions: { name: string, value: string }[] = [
     {name: 'От А До Я', value: 'az-asc'},
     {name: 'От Я До А', value: 'az-desc'},
@@ -77,7 +77,7 @@ export class CatalogComponent implements OnInit {
       });
   }
 
-  processCatalog() {
+  processCatalog(): void {
     this.categoryService.getCategoriesWithTypes()
       .subscribe(data => {
         this.categoriesWithTypes = data;
@@ -163,7 +163,7 @@ export class CatalogComponent implements OnInit {
       });
   }
 
-  removeAppliedFilter(appliedFilter: AppliedFilter) {
+  removeAppliedFilter(appliedFilter: AppliedFilter): void {
     if (appliedFilter.urlParam === 'heightFrom' || appliedFilter.urlParam === 'heightTo' ||
       appliedFilter.urlParam === 'diameterFrom' || appliedFilter.urlParam === 'diameterTo') {
       delete this.activeParams[appliedFilter.urlParam];
@@ -210,6 +210,13 @@ export class CatalogComponent implements OnInit {
       this.router.navigate(['/catalog'], {
         queryParams: this.activeParams
       });
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  click(event: Event): void {
+    if (this.sortingOpen && (event.target as HTMLElement).className.indexOf('catalog-sorting')) {
+      this.sortingOpen = false;
     }
   }
 

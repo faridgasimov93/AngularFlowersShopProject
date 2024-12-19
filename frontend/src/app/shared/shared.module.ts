@@ -8,6 +8,7 @@ import {CategoryFilterComponent} from './components/category-filter/category-fil
 import {CountSelectorComponent} from './components/count-selector/count-selector.component';
 import {LoaderComponent} from './components/loader/loader.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     ProductCardComponent,
     CategoryFilterComponent,
     CountSelectorComponent,
-    LoaderComponent
+    LoaderComponent,
+    AddToCartComponent
   ],
   imports: [
     CommonModule,
@@ -23,13 +25,14 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatProgressSpinnerModule,
     RouterModule
   ],
-  exports: [
-    PasswordRepeatDirective,
-    ProductCardComponent,
-    CategoryFilterComponent,
-    LoaderComponent,
-    CountSelectorComponent
-  ]
+    exports: [
+        PasswordRepeatDirective,
+        ProductCardComponent,
+        CategoryFilterComponent,
+        LoaderComponent,
+        CountSelectorComponent,
+        AddToCartComponent
+    ]
 })
 export class SharedModule {
 }
